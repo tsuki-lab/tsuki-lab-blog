@@ -1,6 +1,5 @@
 {
   "name": "@example/basics",
-  "type": "module",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,9 +7,33 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint --cache .",
+    "prettier": "prettier --cache --cache-location .prettiercache .",
+    "format": "yarn prettier -w",
+    "format:check": "yarn prettier -c",
+    "fix": "yarn lint --fix && yarn format --loglevel error",
+    "prepare": "husky install"
   },
   "dependencies": {
-    "astro": "^1.8.0"
+    "@astrojs/preact": "^1.2.0",
+    "@astrojs/sitemap": "^1.0.0",
+    "astro": "^1.8.0",
+    "astro-seo": "^0.6.1",
+    "preact": "^10.6.5"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^5.47.1",
+    "@vanilla-extract/vite-plugin": "^3.7.0",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-astro": "^0.21.1",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "husky": "^7.0.0",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.1"
+  },
+  "lint-staged": {
+    "*": "prettier -w --ignore-unknown"
   }
 }
