@@ -20,7 +20,8 @@
     "@astrojs/sitemap": "^1.0.0",
     "astro": "^1.8.0",
     "astro-seo": "^0.6.1",
-    "preact": "^10.6.5"
+    "preact": "^10.6.5",
+    "sakura.css": "^1.4.1"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^5.47.1",
