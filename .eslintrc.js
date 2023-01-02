@@ -1,5 +1,9 @@
 module.exports = {
   extends: ["plugin:astro/jsx-a11y-recommended", "prettier"],
+  parserOptions: {
+    sourceType: "module",
+    ecmaVersion: "latest",
+  },
   overrides: [
     {
       files: ["*.astro"],
