@@ -51,9 +51,9 @@ posts = posts.concat(parsedZennFeed);
 posts.sort((a, b) => Date.parse(b.data.date) - Date.parse(a.data.date));
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="blog｜tsuki-lab.net">
   <main>
-    <h1>Home</h1>
+    <h1>Blog</h1>
     <ul class={cardListStyle}>
       {
         posts.map((post) => (
