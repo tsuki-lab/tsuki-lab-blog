@@ -1,7 +1,9 @@
 ---
 import "sakura.css/css/sakura-earthly.css";
 // import 'sakura.css/css/sakura-dark.css';
+import { themaStyle } from "../styles/thema.css";
 import { SEO } from "astro-seo";
+import { Icon } from "astro-icon";
 
 export interface Props {
   title: string;
@@ -23,7 +25,94 @@ const { title } = Astro.props;
       ],
     }}
   />
-  <body>
+  <body class={themaStyle}>
+    <header class="header">
+      <a href="/" class="siteTopAnchor">
+        <h1>blog.tsuki-lab.net</h1>
+      </a>
+      <nav class="nav">
+        <a
+          class="icon"
+          href="https://zenn.dev/rabbit"
+          target="_blank"
+          aria-label="Zenn"
+        >
+          <Icon name="simple-icons:zenn" />
+        </a>
+        <a
+          class="icon"
+          href="https://twitter.com/hanetsuki_dev"
+          target="_blank"
+          aria-label="Twitter"
+        >
+          <Icon name="simple-icons:twitter" />
+        </a>
+        <a
+          class="icon"
+          href="https://github.com/tsuki-lab"
+          target="_blank"
+          aria-label="GitHub"
+        >
+          <Icon name="simple-icons:github" />
+        </a>
+      </nav>
+    </header>
     <slot />
-  </body>
+    <footer class="footer">
+      <p class="analyticsMessage">
+        このサイトは、<a
+          href="https://policies.google.com/technologies/partner-sites?hl=ja"
+          target="_blank">Google Analytics</a
+        >を使用しています。
+      </p>
+      <small>©2023 tsuki-lab</small>
+    </footer>
+  </body><style lang="scss">
+    .siteTopAnchor {
+      color: #222222 !important;
+      &:hover {
+        border-bottom: none;
+      }
+    }
+
+    .header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      @media screen and (max-width: 684px) {
+        display: block;
+      }
+    }
+
+    .nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    .analyticsMessage {
+      margin-bottom: 0.8rem;
+      font-size: 1.53rem;
+      @media (max-width: 382px) {
+        font-size: 1.35rem;
+      }
+    }
+
+    .icon {
+      color: #222222 !important;
+      width: 32px;
+      display: block;
+      @media screen and (max-width: 684px) {
+        width: 28px;
+      }
+      &:hover {
+        border-bottom: none;
+      }
+    }
+
+    .footer {
+      padding-top: 1.6rem;
+      border-top: 1px solid #c8c9cc;
+      color: #4a4b4e;
+    }
+  </style>
 </html>

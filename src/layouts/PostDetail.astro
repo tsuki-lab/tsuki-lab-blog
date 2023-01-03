@@ -1,12 +1,17 @@
 ---
 import Layout from "./Layout.astro";
-import "../styles/postDetail.css";
+import { wrapperStyle } from "../styles/postDetail.css";
+
 const { frontmatter, getHeadings, rawContent, compiledContent } = Astro.props;
 const { title, description, ogImage, datetime, tags } = frontmatter;
 ---
 
 <Layout title={title}>
-  <main>
+  <main class={wrapperStyle}>
+    <a href="/">
+      <span>&larr;</span>
+      一覧へ戻る
+    </a>
     <h1>{title}</h1>
     <slot />
   </main>

@@ -11,7 +11,24 @@ export default defineConfig({
   },
   integrations: [sitemap(), preact()],
   markdown: {
+    remarkPlugins: [digest],
     rehypePlugins: [[rehypeShiftHeading, { shift: 1 }]],
     extendDefaultPlugins: true,
   },
 });
+
+function digest() {
+  const transfer2Text = (tree) => {
+    return tree.children.reduce((acc, crr) => {
+      if (crr.type === "text") {
+        return (acc += crr.value);
+      }
+      return (acc += transfer2Text(crr));
+    }, "");
+  };
+
+  return function (tree, file) {
+    const text = transfer2Text(tree);
+    file.data.astro.frontmatter.digest = text.slice(0, 140);
+  };
+}

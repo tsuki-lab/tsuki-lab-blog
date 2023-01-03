@@ -1,6 +1,8 @@
-import { globalStyle } from "@vanilla-extract/css";
+import { style, globalStyle } from "@vanilla-extract/css";
 
-globalStyle("p", {
+export const wrapperStyle = style({});
+
+globalStyle(`${wrapperStyle} p`, {
   whiteSpace: "pre-line",
   lineHeight: 2,
 });

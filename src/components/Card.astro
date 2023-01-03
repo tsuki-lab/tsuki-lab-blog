@@ -1,21 +1,30 @@
 ---
+import {
+  cardStyle,
+  digestStyle,
+  titleStyle,
+  dateStyle,
+  anchorStyle,
+} from "./Card.css";
+
 export interface Props {
   title: string;
-  body: string;
+  digest: string;
   href: string;
+  date: string;
 }
 
-const { href, title, body } = Astro.props;
+const { href, title, digest, date } = Astro.props;
 ---
 
-<li class="link-card">
-  <a href={href}>
-    <h2>
+<li class={cardStyle}>
+  <a href={href} class={anchorStyle}>
+    <h2 class={titleStyle}>
       {title}
-      <span>&rarr;</span>
     </h2>
-    <p>
-      {body}
+    <p class={digestStyle}>
+      {digest}
     </p>
+    <date class={dateStyle}>{date}</date>
   </a>
 </li>

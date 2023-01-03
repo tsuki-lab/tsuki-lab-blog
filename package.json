@@ -19,6 +19,7 @@
     "@astrojs/preact": "^1.2.0",
     "@astrojs/sitemap": "^1.0.0",
     "astro": "^1.8.0",
+    "astro-icon": "^0.8.0",
     "astro-seo": "^0.6.1",
     "preact": "^10.6.5",
     "rehype-shift-heading": "^1.0.2",
@@ -33,7 +34,8 @@
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "husky": "^7.0.0",
     "lint-staged": "^13.1.0",
-    "prettier": "^2.8.1"
+    "prettier": "^2.8.1",
+    "sass": "^1.57.1"
   },
   "lint-staged": {
     "*": "prettier -w --ignore-unknown"
