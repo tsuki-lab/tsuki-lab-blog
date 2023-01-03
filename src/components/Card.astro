@@ -1,4 +1,5 @@
 ---
+import Icon from "astro-icon";
 import {
   cardStyle,
   digestStyle,
@@ -12,19 +13,37 @@ export interface Props {
   digest: string;
   href: string;
   date: string;
+  target?: string;
+  zenn?: boolean;
 }
 
-const { href, title, digest, date } = Astro.props;
+const { href, title, digest, date, target, zenn } = Astro.props;
 ---
 
 <li class={cardStyle}>
-  <a href={href} class={anchorStyle}>
+  <a href={href} class={anchorStyle} target={target}>
     <h2 class={titleStyle}>
       {title}
     </h2>
     <p class={digestStyle}>
       {digest}
     </p>
-    <date class={dateStyle}>{date}</date>
+    <div>
+      <date class={dateStyle}>{date}</date>
+      {zenn && <Icon name="simple-icons:zenn" />}
+    </div>
   </a>
 </li>
+
+<style>
+  [astro-icon] {
+    display: inline-block;
+    width: 20px;
+    vertical-align: text-top;
+    margin-left: 4px;
+  }
+
+  [astro-icon="simple-icons:zenn"] {
+    color: #3ea8ff;
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+import { Icon } from "astro-icon";
+
+export interface Props {
+  iconName: string;
+  href: string;
+}
+
+const { width, iconName, href, ...props } = Astro.props;
+---
+
+<a class="icon" href={href} target="_blank" {...props}>
+  <Icon name={iconName} />
+</a>
+
+<style lang="scss">
+  .icon {
+    color: #222222 !important;
+    width: 32px;
+    display: block;
+    @media screen and (max-width: 684px) {
+      width: 28px;
+    }
+    &:hover {
+      border-bottom: none;
+    }
+  }
+</style>

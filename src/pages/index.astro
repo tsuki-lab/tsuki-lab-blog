@@ -2,16 +2,53 @@
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import { cardListStyle } from "./index.css";
+import { getZennRssFeed, ZennFeed } from "../utils/get-zenn-rss-feed";
 
-let posts = await Astro.glob("./posts/*.md");
+type MarkdownFeed = {
+  title: string;
+  digest: string;
+  date: string;
+  slug: string;
+};
 
-if (import.meta.env.PROD) {
-  posts = posts.filter((post) => !post.frontmatter.draft);
-}
+type Post =
+  | {
+      type: "markdown";
+      data: MarkdownFeed;
+    }
+  | {
+      type: "zenn";
+      data: ZennFeed;
+    };
 
-posts.sort(
-  (a, b) => Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date)
-);
+let posts: Post[] = await Astro.glob("./posts/*.md").then((res) => {
+  const feeds = res.filter(
+    (post) => import.meta.env.DEV || !post.frontmatter.draft
+  );
+
+  return feeds.map((v) => ({
+    type: "markdown",
+    data: {
+      title: v.frontmatter.title ?? "",
+      digest: v.frontmatter.digest ?? "",
+      date: v.frontmatter.date ?? "",
+      slug: v.url ?? "",
+    },
+  }));
+});
+
+// console.log(posts);
+const zennFeed = await getZennRssFeed();
+const parsedZennFeed = zennFeed.pagePosts.map((data) => {
+  return {
+    type: "zenn",
+    data,
+  } as const;
+});
+
+posts = posts.concat(parsedZennFeed);
+
+posts.sort((a, b) => Date.parse(b.data.date) - Date.parse(a.data.date));
 ---
 
 <Layout title="Welcome to Astro.">
@@ -21,10 +58,12 @@ posts.sort(
       {
         posts.map((post) => (
           <Card
-            href={post.url!}
-            title={post.frontmatter.title}
-            digest={post.frontmatter.digest}
-            date={post.frontmatter.date}
+            href={post.data.slug}
+            title={post.data.title}
+            digest={post.data.digest}
+            date={post.data.date}
+            target={post.type === "zenn" ? "_blank" : undefined}
+            zenn={post.type === "zenn"}
           />
         ))
       }

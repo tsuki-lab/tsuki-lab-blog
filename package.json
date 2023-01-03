@@ -21,8 +21,10 @@
     "astro": "^1.8.0",
     "astro-icon": "^0.8.0",
     "astro-seo": "^0.6.1",
+    "dayjs": "^1.11.7",
     "preact": "^10.6.5",
     "rehype-shift-heading": "^1.0.2",
+    "rss-parser": "^3.12.0",
     "sakura.css": "^1.4.1"
   },
   "devDependencies": {

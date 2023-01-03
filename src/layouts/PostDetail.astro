@@ -1,6 +1,7 @@
 ---
 import Layout from "./Layout.astro";
 import { wrapperStyle } from "../styles/postDetail.css";
+import { Icon } from "astro-icon";
 
 const { frontmatter, getHeadings, rawContent, compiledContent } = Astro.props;
 const { title, description, ogImage, datetime, tags } = frontmatter;
@@ -8,11 +9,47 @@ const { title, description, ogImage, datetime, tags } = frontmatter;
 
 <Layout title={title}>
   <main class={wrapperStyle}>
+    <h1>{title}</h1>
+    <slot />
+
+    <aside aria-label="share">
+      <a
+        class="shareLink"
+        href={`http://twitter.com/share?url=${Astro.url}&text=${title}｜blog.tsuki-lab.net`}
+        target="_blank"
+      >
+        Share to
+        <Icon name="simple-icons:twitter" />
+      </a>
+    </aside>
+
     <a href="/">
       <span>&larr;</span>
       一覧へ戻る
     </a>
-    <h1>{title}</h1>
-    <slot />
   </main>
 </Layout>
+
+<style lang="scss">
+  .shareLink {
+    display: flex;
+    align-items: center;
+    border: none;
+    gap: 6px;
+    padding: 0 16px;
+    width: fit-content;
+    border-radius: 9999px;
+    margin-bottom: 2.5rem;
+    background-color: #1d9bf0;
+    font-weight: bold;
+    color: #fff !important;
+
+    [astro-icon] {
+      width: 24px;
+    }
+
+    &:hover {
+      border: none;
+    }
+  }
+</style>
